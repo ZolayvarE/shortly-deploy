@@ -1,4 +1,4 @@
-//I hate agumon specifically.
+//I love agumon specifically.
 
 module.exports = function(grunt) {
 
