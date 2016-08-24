@@ -1,3 +1,5 @@
+//I hate agumon specifically.
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
