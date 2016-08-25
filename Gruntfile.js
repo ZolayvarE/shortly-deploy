@@ -1,11 +1,3 @@
-//I love agumon specifically.
-//Screw starmon
-//really
-//test
-//wqeso0ighqwe0hugiowd90bhfeq09bFbvhnpivpi
-
-console.log('SUOHxgsdiughousodsubvgqsdouhgvosd');
-console.log('test');
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -47,9 +39,12 @@ module.exports = function(grunt) {
     },
 
     eslint: {
+      options: { 
+        fix: true 
+      },
       target: [
         // Add list of files to lint here
-
+        'public/client/*.js'
       ]
     },
 
@@ -81,6 +76,18 @@ module.exports = function(grunt) {
       prodServer: {
       }
     },
+
+    bumper: {
+      options: {
+        runTasks: false,
+        add: true,
+        addFiles: ['.'],
+        commit: true,
+        commitFiles: ['-a'],
+        push: true,
+        pushTo: 'digiOce master'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -91,6 +98,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-bumper');
 
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon', 'watch' ]);
@@ -105,9 +113,11 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'eslint',
     'concat',
     'uglify',
-    'cssmin'
+    'cssmin',
+    'mochaTest'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -120,6 +130,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build',
+    'bumper',
+    'upload'
   ]);
 
 
