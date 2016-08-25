@@ -1,9 +1,17 @@
 // NOTE: this file is not needed when using MongoDB
-var db = require('../config');
+var mongoose = require('../config');
 var Link = require('../models/link');
 
-var Links = new db.Collection();
+var Links = mongoose.connection.db.collection('linkSchema');
 
-Links.model = Link;
+// console.log(Links);
+
+
+Link.find({}, function (err, res) {
+  console.log(res);
+});
+// var Links = new db.Collection();
+
+// Links.model = Link;
 
 module.exports = Links;
